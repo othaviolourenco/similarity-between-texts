@@ -75,8 +75,26 @@ def compara_assinatura(as_a, as_b):
 
 def calcula_assinatura(texto):
     '''IMPLEMENTAR. Essa funcao recebe um texto e deve devolver a assinatura do texto.'''
-    pass
+    lista_palavras = []
+    lista_frases = []
+    lista_sent = separa_sentencas(texto)
+    for sent in lista_sent: # separa as sentencas em uma lista de frase
+        lista_frases.extend(separa_frases(texto))
+    for frase in lista_frases: # separa as frases em uma lista de palavras
+        lista_palavras.extend(separa_palavras)
+    
+    total_palavras = len(lista_palavras) # pega o toltal de palavras na lista de palavras
+    tamanho_palavras = 0
+    for palavra in lista_palavras: # pega a somatoria do tamanho de cada palavra
+        tamanho_palavras += len(palavra)
+
+    wal_texto = tamanho_palavras / total_palavras # media das palavras
+
 
 def avalia_textos(textos, ass_cp):
     '''IMPLEMENTAR. Essa funcao recebe uma lista de textos e uma assinatura ass_cp e deve devolver o numero (1 a n) do texto com maior probabilidade de ter sido infectado por COH-PIAH.'''
     pass
+
+le_assinatura()
+le_textos()
+print(calcula_assinatura())

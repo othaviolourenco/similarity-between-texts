@@ -75,26 +75,58 @@ def compara_assinatura(as_a, as_b):
 
 def calcula_assinatura(texto):
     '''IMPLEMENTAR. Essa funcao recebe um texto e deve devolver a assinatura do texto.'''
+    
     lista_palavras = []
     lista_frases = []
     lista_sent = separa_sentencas(texto)
+    lista_palavras_diferente = n_palavras_diferentes(lista_palavras) # numero de palvras que aparecem uma vez
+    lista_palavras_unicas = n_palavras_unicas(lista_palavras)
+    
     for sent in lista_sent: # separa as sentencas em uma lista de frase
-        lista_frases.extend(separa_frases(texto))
+        lista_frases.extend(separa_frases(sent))
+
     for frase in lista_frases: # separa as frases em uma lista de palavras
-        lista_palavras.extend(separa_palavras)
+        lista_palavras.extend(separa_palavras(frase))
+    
+    total_caracteres = 0
+    for frase in lista_frases: # total de caracteres em uma frase
+        total_caracteres += len(frase)
     
     total_palavras = len(lista_palavras) # pega o toltal de palavras na lista de palavras
+
+    total_sent = len(lista_sent) # pega o toltal de sentenças na lista de sentença
+
     tamanho_palavras = 0
     for palavra in lista_palavras: # pega a somatoria do tamanho de cada palavra
         tamanho_palavras += len(palavra)
 
+    tamanho_sent = 0
+    for sent in lista_sent: # pega a somatoria do tamanho de cada sentença
+        tamanho_sent += len(sent)
+
+
+    # TAMANHO MEDIO DE PALAVRAS    
     wal_texto = tamanho_palavras / total_palavras # media das palavras
 
+    # RELACAO TYPE-TOKEN
+    ttr_texto = lista_palavras_diferente / total_palavras # palavras diferentes divididas pelo total de palvras
+
+    # RAZAO HAPAX LEGOMANA
+    hlr_texto = lista_palavras_unicas / total_palavras # palavras unicas divididas pelo tolta de palavras
+
+    # TAMANHO MEDIO DE SENTENÇA
+    sal_texto = tamanho_sent / total_sent
+
+    # COMPLEXIDADE DE SENTENÇA
+    sac_texto = len(lista_frases) / total_sent
+
+    # TAMANHO MEDIO DE FRASE
+    pal_texto = total_caracteres / len(lista_frases)
+
+    return [wal_texto, ttr_texto, hlr_texto, sal_texto, sac_texto, pal_texto]
 
 def avalia_textos(textos, ass_cp):
     '''IMPLEMENTAR. Essa funcao recebe uma lista de textos e uma assinatura ass_cp e deve devolver o numero (1 a n) do texto com maior probabilidade de ter sido infectado por COH-PIAH.'''
     pass
 
-le_assinatura()
-le_textos()
-print(calcula_assinatura())
+print(calcula_assinatura("can be broke now because i need money"))
